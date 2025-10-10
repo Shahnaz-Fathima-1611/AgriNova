@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmAssist - AI-Powered Pest Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>FarmAssist</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#pest-risk" class="nav-link">Pest Risk</a></li>
+                <li><a href="#news" class="nav-link">News</a></li>
+                <li><a href="#map" class="nav-link">Map</a></li>
+                <li><a href="#pesticide" class="nav-link">Pesticide Scheduler</a></li>
+                <li><a href="#login" class="nav-link">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Dashboard Section -->
+        <section id="home" class="section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1>Your Farm Management Hub</h1>
+                    <p class="hero-subtitle">Integrated pest management, weather monitoring, and data-driven insights for modern agriculture</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <i class="fas fa-newspaper card-icon"></i>
+                        <h3>Latest News</h3>
+                        <p>Stay updated with regional pest alerts and weather forecasts</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('news')">View News</button>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <i class="fas fa-calendar-alt card-icon"></i>
+                        <h3>Plan Your Schedule</h3>
+                        <p>Manage pesticide applications and treatment schedules</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('pesticide')">Plan Schedule</button>
+                    </div>
+                </div>
+                
+                <div class="card dashboard-card">
+                    <div class="card__body">
+                        <i class="fas fa-chart-line card-icon"></i>
+                        <h3>View Your Data</h3>
+                        <p>Analyze pest risk trends and environmental data</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('pest-risk')">View Data</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pest Risk Assessment Section -->
+        <section id="pest-risk" class="section">
+            <div class="risk-assessment-container">
+                <div class="section-header">
+                    <h2>Check Your Pest Risk</h2>
+                    <p>Adjust environmental parameters to get AI-powered risk predictions</p>
+                </div>
+                
+                <div class="risk-controls">
+                    <div class="control-group">
+                            <label for="country-select">Country</label>
+                            <select id="country-select" class="form-control">
+                                <option value="">Select country</option>
+                                <option value="USA">USA</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Brazil">Brazil</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Mexico">Mexico</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Peru">Peru</option>
+                                <option value="Venezuela">Venezuela</option>
+                                <option value="UK">UK</option>
+                                <option value="France">France</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Italy">Italy</option>
+                                <option value="Spain">Spain</option>
+                                <option value="Portugal">Portugal</option>
+                                <option value="Netherlands">Netherlands</option>
+                                <option value="Belgium">Belgium</option>
+                                <option value="Sweden">Sweden</option>
+                                <option value="Norway">Norway</option>
+                                <option value="Finland">Finland</option>
+                                <option value="Poland">Poland</option>
+                                <option value="Russia">Russia</option>
+                                <option value="Ukraine">Ukraine</option>
+                                <option value="Turkey">Turkey</option>
+                                <option value="India">India</option>
+                                <option value="China">China</option>
+                                <option value="Japan">Japan</option>
+                                <option value="South Korea">South Korea</option>
+                                <option value="Indonesia">Indonesia</option>
+                                <option value="Thailand">Thailand</option>
+                                <option value="Vietnam">Vietnam</option>
+                                <option value="Philippines">Philippines</option>
+                                <option value="Malaysia">Malaysia</option>
+                                <option value="Australia">Australia</option>
+                                <option value="New Zealand">New Zealand</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="Egypt">Egypt</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Ethiopia">Ethiopia</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="Morocco">Morocco</option>
+                                <option value="Saudi Arabia">Saudi Arabia</option>
+                                <option value="Iran">Iran</option>
+                                <option value="Pakistan">Pakistan</option>
+                                <option value="Bangladesh">Bangladesh</option>
+                                <option value="Nepal">Nepal</option>
+                                <option value="Sri Lanka">Sri Lanka</option>
+                            </select>
+                            <div style="margin-top:10px">
+                                <label for="country-manual">Or type country name</label>
+                                <input type="text" id="country-manual" class="form-control" placeholder="Enter country manually">
+                            </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="crop-input">Crop</label>
+                        <select id="crop-input" class="form-control">
+                            <option value="Wheat">Wheat</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Maize">Maize</option>
+                            <option value="Soybean">Soybean</option>
+                            <option value="Cotton">Cotton</option>
+                            <option value="Potato">Potato</option>
+                            <option value="Barley">Barley</option>
+                            <option value="Sugarcane">Sugarcane</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="temperature">Temperature: <span id="temp-value">22</span>°C</label>
+                        <input type="range" id="temperature" min="0" max="45" value="22" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label for="humidity">Humidity: <span id="humidity-value">70</span>%</label>
+                        <input type="range" id="humidity" min="20" max="100" value="70" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label for="rainfall">Rainfall: <span id="rainfall-value">5</span>mm</label>
+                        <input type="range" id="rainfall" min="0" max="50" value="5" class="slider">
+                    </div>
+                    <div class="control-group">
+                        <label for="windspeed">Wind Speed: <span id="wind-value">5</span>km/h</label>
+                        <input type="range" id="windspeed" min="0" max="30" value="5" class="slider">
+                    </div>
+                    <button class="btn btn--primary calculate-btn" id="calculate-risk-btn">Calculate Risk</button>
+                </div>
+                
+                <div class="risk-result" id="risk-result">
+                    <div class="risk-display">
+                        <div class="risk-level high-risk" id="risk-level">High Risk</div>
+                        <div class="risk-score" id="risk-score">0.73</div>
+                    </div>
+                    <div class="risk-warning" id="risk-warning">
+                        Warning: High aphid risk predicted. Consider deploying biocontrol agents within 48 hours
+                    </div>
+                </div>
+                
+                <div class="chart-section">
+                    <h3>Regional Aphid Risk Trend</h3>
+                    <div class="chart-container" style="position: relative; height: 300px;">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                    <p class="chart-note">Historical data showing seasonal pest risk patterns in your region</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Alerts Section -->
+        <section id="news" class="section">
+            <div class="news-container">
+                <div class="section-header">
+                    <h2>News & Alerts for Your Region</h2>
+                    <p>Stay informed about pest risks, weather updates, and agricultural news</p>
+                </div>
+                
+                <div class="news-grid" id="news-grid">
+                    <!-- News items will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Pesticide Management Section -->
+        <section id="pesticide" class="section">
+            <div class="pesticide-container">
+                <div class="section-header">
+                    <h2>Pesticide Management</h2>
+                    <p>AI-powered recommendations and treatment scheduling</p>
+                </div>
+                
+                <div class="ai-recommendations">
+                    <h3>AI Recommendations</h3>
+                    <ul id="recommendations-list">
+                        <!-- Recommendations will be populated by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="schedule-section">
+                    <h3>Upcoming Schedule</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 24px;">
+                        <button class="btn btn--primary btn--lg" id="add-schedule-btn">Add Schedule</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Target Pest</th>
+                                    <th>Treatment</th>
+                                    <th>Quantity</th>
+                                    <th>Area</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-tbody">
+                                <!-- Schedule items will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Add Schedule Modal -->
+                <div id="add-schedule-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Add New Schedule</h2>
+                            <button class="close-modal" onclick="closeAddScheduleModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-schedule-form" class="auth-form">
+                                <div class="form-group">
+                                    <label for="schedule-date" class="form-label">Date</label>
+                                    <input type="date" id="schedule-date" name="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="schedule-pest" class="form-label">Target Pest</label>
+                                    <input type="text" id="schedule-pest" name="targetPest" class="form-control" required placeholder="e.g. Aphids">
+                                </div>
+                                <div class="form-group">
+                                    <label for="schedule-treatment" class="form-label">Treatment</label>
+                                    <input type="text" id="schedule-treatment" name="treatment" class="form-control" required placeholder="e.g. Neem Oil">
+                                </div>
+                                <div class="form-group">
+                                    <label for="schedule-quantity" class="form-label">Quantity</label>
+                                    <input type="text" id="schedule-quantity" name="quantity" class="form-control" required placeholder="e.g. 5ml/L">
+                                </div>
+                                <div class="form-group">
+                                    <label for="schedule-area" class="form-label">Area</label>
+                                    <input type="text" id="schedule-area" name="area" class="form-control" required placeholder="e.g. Field A (2.5 ha)">
+                                </div>
+                                <input type="hidden" name="status" value="Planned">
+                                <button type="submit" class="btn btn--primary btn--full-width">Add Schedule</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-section">
+                    <h3>Recent Applications</h3>
+                    <div class="table-container">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Target Pest</th>
+                                    <th>Treatment</th>
+                                    <th>Quantity</th>
+                                    <th>Area</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-tbody">
+                                <!-- Recent applications will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Login to FarmAssist</h2>
+                    <button class="close-modal" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                    </form>
+                    <div class="divider"></div>
+                    <button class="btn btn--outline btn--full-width google-btn">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <p>Calculating risk assessment...</p>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+     <!-- <script src="app_test.js"></script> -->
+</body>
+</html>
