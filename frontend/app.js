@@ -96,6 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeApp();
 });
 
+// Language state
+let currentLanguage = 'en';
+
 // Initialize application
 function initializeApp() {
   setupNavigation();
@@ -106,10 +109,193 @@ function initializeApp() {
   populatePesticideSection();
   setupForms();
   setupModalHandlers();
-  setupScheduleHandlers(); // Add this line
+  setupScheduleHandlers();
+  setupLanguageToggle();
   
   // Show home section by default
   showSection('home');
+}
+
+// Language switching functionality
+function setupLanguageToggle() {
+  const languageToggle = document.getElementById('languageToggle');
+  if (languageToggle) {
+    languageToggle.addEventListener('click', toggleLanguage);
+  }
+}
+
+function toggleLanguage() {
+  currentLanguage = currentLanguage === 'en' ? 'ta' : 'en';
+  updateLanguageDisplay();
+}
+
+// Language translations
+const translations = {
+  en: {
+    riskLevel: {
+      "High Risk": "High Risk",
+      "Medium Risk": "Medium Risk",
+      "Low Risk": "Low Risk"
+    },
+    recommendations: {
+      high: "Warning: High aphid risk predicted. Consider deploying biocontrol agents within 48 hours",
+      medium: "Moderate aphid risk detected. Monitor crops closely and prepare treatment options",
+      low: "Low aphid risk. Continue regular monitoring and maintain preventive measures"
+    },
+    controls: {
+      temperature: "Temperature",
+      humidity: "Humidity",
+      rainfall: "Rainfall",
+      windSpeed: "Wind Speed"
+    },
+    schedule: {
+      status: {
+        "Planned": "Planned",
+        "Completed": "Completed"
+      },
+      pests: {
+        "Aphids": "Aphids",
+        "Thrips": "Thrips",
+        "Spider Mites": "Spider Mites",
+        "Whiteflies": "Whiteflies"
+      },
+      treatments: {
+        "Neem Oil": "Neem Oil",
+        "Insecticidal Soap": "Insecticidal Soap",
+        "Predatory Mites": "Predatory Mites",
+        "Yellow Sticky Traps": "Yellow Sticky Traps"
+      }
+    }
+  },
+  ta: {
+    riskLevel: {
+      "High Risk": "அதிக ஆபத்து",
+      "Medium Risk": "மிதமான ஆபத்து",
+      "Low Risk": "குறைந்த ஆபத்து"
+    },
+    recommendations: {
+      high: "எச்சரிக்கை: அதிக அளவு பூச்சி ஆபத்து கணிக்கப்பட்டுள்ளது. 48 மணி நேரத்திற்குள் உயிரியல் கட்டுப்பாட்டு முகவர்களை பயன்படுத்த பரிசீலிக்கவும்",
+      medium: "மிதமான பூச்சி ஆபத்து கண்டறியப்பட்டது. பயிர்களை நெருக்கமாக கண்காணித்து சிகிச்சை விருப்பங்களை தயார் செய்யவும்",
+      low: "குறைந்த பூச்சி ஆபத்து. வழக்கமான கண்காணிப்பை தொடரவும் மற்றும் தடுப்பு நடவடிக்கைகளை பராமரிக்கவும்"
+    },
+    controls: {
+      temperature: "வெப்பநிலை",
+      humidity: "ஈரப்பதம்",
+      rainfall: "மழைப்பொழிவு",
+      windSpeed: "காற்று வேகம்"
+    },
+    schedule: {
+      status: {
+        "Planned": "திட்டமிடப்பட்டது",
+        "Completed": "முடிக்கப்பட்டது"
+      },
+      pests: {
+        "Aphids": "அபிட்ஸ்",
+        "Thrips": "திரிப்ஸ்",
+        "Spider Mites": "சிலந்தி மைட்ஸ்",
+        "Whiteflies": "வெள்ளை ஈக்கள்"
+      },
+      treatments: {
+        "Neem Oil": "வேப்பெண்ணெய்",
+        "Insecticidal Soap": "பூச்சிக்கொல்லி சோப்பு",
+        "Predatory Mites": "கொன்றுண்ணி மைட்ஸ்",
+        "Yellow Sticky Traps": "மஞ்சள் ஒட்டும் பொறிகள்"
+      }
+    }
+  }
+};
+
+function updateLanguageDisplay() {
+  // Update the language toggle button text
+  const langText = document.querySelector('.lang-text');
+  if (langText) {
+    langText.textContent = langText.getAttribute(`data-${currentLanguage}`);
+  }
+
+  // Update all static elements with data-en and data-ta attributes
+  document.querySelectorAll('[data-en][data-ta]').forEach(element => {
+    element.textContent = element.getAttribute(`data-${currentLanguage}`);
+  });
+
+  // Update dynamic content
+  updateDynamicContent();
+}
+
+function updateDynamicContent() {
+  // Update risk level and recommendation
+  const riskLevel = document.getElementById('risk-level');
+  const riskWarning = document.getElementById('risk-warning');
+  
+  if (riskLevel && riskLevel.textContent) {
+    const currentRiskText = riskLevel.textContent;
+    riskLevel.textContent = translations[currentLanguage].riskLevel[currentRiskText] || currentRiskText;
+  }
+
+  // Update control labels
+  document.querySelectorAll('.control-group label').forEach(label => {
+    const forAttr = label.getAttribute('for');
+    if (forAttr === 'temperature' || forAttr === 'humidity' || forAttr === 'rainfall' || forAttr === 'windspeed') {
+      const value = label.textContent.split(':')[1] || '';
+      label.textContent = translations[currentLanguage].controls[forAttr] + ':' + value;
+    }
+  });
+
+  // Update news items
+  updateNewsContent();
+  
+  // Update pesticide schedules
+  populateScheduleTable();
+  populateRecentApplications();
+  
+  // Update recommendations
+  const recommendationsList = document.getElementById('recommendations-list');
+  if (recommendationsList) {
+    const recommendations = appData.aiRecommendations.map(rec => {
+      if (currentLanguage === 'ta') {
+        return translateRecommendation(rec);
+      }
+      return rec;
+    });
+    recommendationsList.innerHTML = recommendations.map(rec => `<li>${rec}</li>`).join('');
+  }
+}
+
+// Helper function to translate recommendations
+function translateRecommendation(text) {
+  // Translate common phrases in recommendations
+  const phrases = {
+    'aphid risk': 'அபிட்ஸ் ஆபத்து',
+    'probability': 'நிகழ்தகவு',
+    'Neem Oil': 'வேப்பெண்ணெய்',
+    'concentration': 'செறிவு',
+    'hours': 'மணிநேரம்',
+    'Weather conditions': 'வானிலை நிலைமைகள்',
+    'monitoring tools': 'கண்காணிப்பு கருவிகள்',
+    'chemical applications': 'இரசாயன பயன்பாடுகள்',
+    'biological control': 'உயிரியல் கட்டுப்பாடு'
+  };
+  
+  let translatedText = text;
+  Object.entries(phrases).forEach(([en, ta]) => {
+    translatedText = translatedText.replace(new RegExp(en, 'gi'), ta);
+  });
+  
+  return translatedText;
+}
+
+
+// Update news content with translations
+function updateNewsContent() {
+  const newsItems = appData.newsAlerts.map(news => {
+    return {
+      ...news,
+      title: currentLanguage === 'ta' ? translateNewsTitle(news.title) : news.title,
+      content: currentLanguage === 'ta' ? translateNewsContent(news.content) : news.content,
+      priority: currentLanguage === 'ta' ? 'உயர் முன்னுரிமை' : news.priority
+    };
+  });
+  
+  populateNewsSection(newsItems);
 }
 
 // Schedule handlers
@@ -498,13 +684,17 @@ function populateScheduleTable() {
   
   appData.pesticideSchedule.forEach(item => {
     const row = document.createElement('tr');
+    const translatedStatus = translations[currentLanguage].schedule.status[item.status] || item.status;
+    const translatedPest = translations[currentLanguage].schedule.pests[item.targetPest] || item.targetPest;
+    const translatedTreatment = translations[currentLanguage].schedule.treatments[item.treatment] || item.treatment;
+    
     row.innerHTML = `
       <td>${formatDate(item.date)}</td>
-      <td>${item.targetPest}</td>
-      <td>${item.treatment}</td>
+      <td>${translatedPest}</td>
+      <td>${translatedTreatment}</td>
       <td>${item.quantity}</td>
       <td>${item.area}</td>
-      <td><span class="status-${item.status.toLowerCase()}">${item.status}</span></td>
+      <td><span class="status-${item.status.toLowerCase()}">${translatedStatus}</span></td>
     `;
     tbody.appendChild(row);
   });
@@ -518,13 +708,17 @@ function populateRecentApplications() {
   
   appData.recentApplications.forEach(item => {
     const row = document.createElement('tr');
+    const translatedStatus = translations[currentLanguage].schedule.status[item.status] || item.status;
+    const translatedPest = translations[currentLanguage].schedule.pests[item.targetPest] || item.targetPest;
+    const translatedTreatment = translations[currentLanguage].schedule.treatments[item.treatment] || item.treatment;
+    
     row.innerHTML = `
       <td>${formatDate(item.date)}</td>
-      <td>${item.targetPest}</td>
-      <td>${item.treatment}</td>
+      <td>${translatedPest}</td>
+      <td>${translatedTreatment}</td>
       <td>${item.quantity}</td>
       <td>${item.area}</td>
-      <td><span class="status-${item.status.toLowerCase()}">${item.status}</span></td>
+      <td><span class="status-${item.status.toLowerCase()}">${translatedStatus}</span></td>
     `;
     tbody.appendChild(row);
   });
