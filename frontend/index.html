@@ -14,15 +14,19 @@
         <div class="nav-container">
             <div class="nav-brand">
                 <i class="fas fa-leaf"></i>
-                <span>FarmAssist</span>
+                <span>AgriNova</span>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#pest-risk" class="nav-link">Pest Risk</a></li>
-                <li><a href="#news" class="nav-link">News</a></li>
-                <li><a href="#map" class="nav-link">Map</a></li>
-                <li><a href="#pesticide" class="nav-link">Pesticide Scheduler</a></li>
-                <li><a href="#login" class="nav-link">Login</a></li>
+                <li><a href="#home" class="nav-link active" data-en="Home" data-ta="முகப்பு">Home</a></li>
+                <li><a href="#pest-risk" class="nav-link" data-en="Pest Risk" data-ta="பூச்சி ஆபத்து">Pest Risk</a></li>
+                <li><a href="#news" class="nav-link" data-en="News" data-ta="செய்திகள்">News</a></li>
+                <li><a href="#map" class="nav-link" data-en="Map" data-ta="வரைபடம்">Map</a></li>
+                <li><a href="#pesticide" class="nav-link" data-en="Pesticide Scheduler" data-ta="பூச்சிக்கொல்லி அட்டவணை">Pesticide Scheduler</a></li>
+                <li><a href="#login" class="nav-link" data-en="Login" data-ta="உள்நுழைய">Login</a></li>
+                <li><button id="languageToggle" class="nav-link" style="background: none; border: none; cursor: pointer;">
+                    <i class="fas fa-language" style="font-size: 20px;"></i>
+                    <span class="lang-text" data-en="English" data-ta="தமிழ்">English</span>
+                </button></li>
             </ul>
         </div>
     </nav>
@@ -33,8 +37,8 @@
         <section id="home" class="section active">
             <div class="hero-section">
                 <div class="hero-content">
-                    <h1>Your Farm Management Hub</h1>
-                    <p class="hero-subtitle">Integrated pest management, weather monitoring, and data-driven insights for modern agriculture</p>
+                    <h1 data-en="Your Farm Management Hub" data-ta="உங்கள் விவசாய மேலாண்மை மையம்">Your Farm Management Hub</h1>
+                    <p class="hero-subtitle" data-en="Integrated pest management, weather monitoring, and data-driven insights for modern agriculture" data-ta="ஒருங்கிணைந்த பூச்சி மேலாண்மை, வானிலை கண்காணிப்பு மற்றும் நவீன விவசாயத்திற்கான தரவு அடிப்படையிலான நுண்ணறிவுகள்">Integrated pest management, weather monitoring, and data-driven insights for modern agriculture</p>
                 </div>
             </div>
             
@@ -42,27 +46,27 @@
                 <div class="card dashboard-card">
                     <div class="card__body">
                         <i class="fas fa-newspaper card-icon"></i>
-                        <h3>Latest News</h3>
-                        <p>Stay updated with regional pest alerts and weather forecasts</p>
-                        <button class="btn btn--primary" onclick="navigateToSection('news')">View News</button>
+                        <h3 data-en="Latest News" data-ta="சமீபத்திய செய்திகள்">Latest News</h3>
+                        <p data-en="Stay updated with regional pest alerts and weather forecasts" data-ta="பிராந்திய பூச்சி எச்சரிக்கைகள் மற்றும் வானிலை முன்னறிவிப்புகளைப் பெறுங்கள்">Stay updated with regional pest alerts and weather forecasts</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('news')" data-en="View News" data-ta="செய்திகளைக் காண">View News</button>
                     </div>
                 </div>
                 
                 <div class="card dashboard-card">
                     <div class="card__body">
                         <i class="fas fa-calendar-alt card-icon"></i>
-                        <h3>Plan Your Schedule</h3>
-                        <p>Manage pesticide applications and treatment schedules</p>
-                        <button class="btn btn--primary" onclick="navigateToSection('pesticide')">Plan Schedule</button>
+                        <h3 data-en="Plan Your Schedule" data-ta="உங்கள் அட்டவணையை திட்டமிடுங்கள்">Plan Your Schedule</h3>
+                        <p data-en="Manage pesticide applications and treatment schedules" data-ta="பூச்சிக்கொல்லி பயன்பாடுகள் மற்றும் சிகிச்சை அட்டவணைகளை நிர்வகிக்கவும்">Manage pesticide applications and treatment schedules</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('pesticide')" data-en="Plan Schedule" data-ta="அட்டவணை திட்டம்">Plan Schedule</button>
                     </div>
                 </div>
                 
                 <div class="card dashboard-card">
                     <div class="card__body">
                         <i class="fas fa-chart-line card-icon"></i>
-                        <h3>View Your Data</h3>
-                        <p>Analyze pest risk trends and environmental data</p>
-                        <button class="btn btn--primary" onclick="navigateToSection('pest-risk')">View Data</button>
+                        <h3 data-en="View Your Data" data-ta="உங்கள் தரவைக் காண்க">View Your Data</h3>
+                        <p data-en="Analyze pest risk trends and environmental data" data-ta="பூச்சி ஆபத்து போக்குகள் மற்றும் சுற்றுச்சூழல் தரவுகளை பகுப்பாய்வு செய்யவும்">Analyze pest risk trends and environmental data</p>
+                        <button class="btn btn--primary" onclick="navigateToSection('pest-risk')" data-en="View Data" data-ta="தரவைக் காண்க">View Data</button>
                     </div>
                 </div>
             </div>
@@ -72,15 +76,15 @@
         <section id="pest-risk" class="section">
             <div class="risk-assessment-container">
                 <div class="section-header">
-                    <h2>Check Your Pest Risk</h2>
-                    <p>Adjust environmental parameters to get AI-powered risk predictions</p>
+                    <h2 data-en="Check Your Pest Risk" data-ta="உங்கள் பூச்சி ஆபத்தை சரிபார்க்கவும்">Check Your Pest Risk</h2>
+                    <p data-en="Adjust environmental parameters to get AI-powered risk predictions" data-ta="AI-ஆல் இயக்கப்படும் ஆபத்து கணிப்புகளைப் பெற சுற்றுச்சூழல் அளவுருக்களை சரிசெய்யவும்">Adjust environmental parameters to get AI-powered risk predictions</p>
                 </div>
                 
                 <div class="risk-controls">
                     <div class="control-group">
-                            <label for="country-select">Country</label>
+                            <label for="country-select" data-en="Country" data-ta="நாடு">Country</label>
                             <select id="country-select" class="form-control">
-                                <option value="">Select country</option>
+                                <option value="" data-en="Select country" data-ta="நாட்டைத் தேர்ந்தெடுக்கவும்">Select country</option>
                                 <option value="USA">USA</option>
                                 <option value="Canada">Canada</option>
                                 <option value="Brazil">Brazil</option>
@@ -191,8 +195,8 @@
         <section id="news" class="section">
             <div class="news-container">
                 <div class="section-header">
-                    <h2>News & Alerts for Your Region</h2>
-                    <p>Stay informed about pest risks, weather updates, and agricultural news</p>
+                    <h2 data-en="News & Alerts for Your Region" data-ta="உங்கள் பகுதிக்கான செய்திகள் & எச்சரிக்கைகள்">News & Alerts for Your Region</h2>
+                    <p data-en="Stay informed about pest risks, weather updates, and agricultural news" data-ta="பூச்சி ஆபத்துகள், வானிலை புதுப்பிப்புகள் மற்றும் விவசாய செய்திகளைப் பற்றி தெரிந்து கொள்ளுங்கள்">Stay informed about pest risks, weather updates, and agricultural news</p>
                 </div>
                 
                 <div class="news-grid" id="news-grid">
@@ -205,21 +209,21 @@
         <section id="pesticide" class="section">
             <div class="pesticide-container">
                 <div class="section-header">
-                    <h2>Pesticide Management</h2>
-                    <p>AI-powered recommendations and treatment scheduling</p>
+                    <h2 data-en="Pesticide Management" data-ta="பூச்சிக்கொல்லி மேலாண்மை">Pesticide Management</h2>
+                    <p data-en="AI-powered recommendations and treatment scheduling" data-ta="AI-ஆல் இயக்கப்படும் பரிந்துரைகள் மற்றும் சிகிச்சை திட்டமிடல்">AI-powered recommendations and treatment scheduling</p>
                 </div>
                 
                 <div class="ai-recommendations">
-                    <h3>AI Recommendations</h3>
+                    <h3 data-en="AI Recommendations" data-ta="AI பரிந்துரைகள்">AI Recommendations</h3>
                     <ul id="recommendations-list">
                         <!-- Recommendations will be populated by JavaScript -->
                     </ul>
                 </div>
                 
                 <div class="schedule-section">
-                    <h3>Upcoming Schedule</h3>
+                    <h3 data-en="Upcoming Schedule" data-ta="வரவிருக்கும் அட்டவணை">Upcoming Schedule</h3>
                     <div style="display: flex; justify-content: center; margin-bottom: 24px;">
-                        <button class="btn btn--primary btn--lg" id="add-schedule-btn">Add Schedule</button>
+                        <button class="btn btn--primary btn--lg" id="add-schedule-btn" data-en="Add Schedule" data-ta="அட்டவணை சேர்க்க">Add Schedule</button>
                     </div>
                     <div class="table-container">
                         <table class="schedule-table">
@@ -334,7 +338,6 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
-     <!-- <script src="app_test.js"></script> -->
+    <script src="app.js"></script> 
 </body>
 </html>
